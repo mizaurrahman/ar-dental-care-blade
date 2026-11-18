@@ -95,6 +95,53 @@ img, video, canvas, svg {
     linear-gradient(180deg, #e8eef8 0%, var(--page) 45%, #e9eef6 100%);
 }
 
+/* Public marketing home */
+.home-page {
+  background: var(--navy);
+}
+
+.home-hero__veil {
+  background:
+    linear-gradient(180deg, rgba(15, 27, 45, 0.55) 0%, rgba(15, 27, 45, 0.72) 42%, rgba(15, 27, 45, 0.92) 100%),
+    radial-gradient(80% 60% at 80% 20%, rgba(47, 111, 237, 0.28), transparent 60%);
+}
+
+.home-secondary-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 0.9375rem;
+  font-weight: 650;
+  text-decoration: none;
+  backdrop-filter: blur(8px);
+  transition: background 160ms var(--ease), border-color 160ms var(--ease), transform 160ms var(--ease);
+}
+
+.home-secondary-cta:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.55);
+  color: #fff;
+}
+
+.home-fade {
+  animation: fadeUp 520ms var(--ease) both;
+}
+
+.home-fade--delay-1 { animation-delay: 80ms; }
+.home-fade--delay-2 { animation-delay: 160ms; }
+.home-fade--delay-3 { animation-delay: 240ms; }
+
+@media (max-width: 639px) {
+  .home-hero .btn-primary,
+  .home-secondary-cta {
+    min-height: 3rem;
+  }
+}
+
 h1, h2, h3, .brand {
   font-family: "Plus Jakarta Sans", "DM Sans", sans-serif;
   letter-spacing: -0.02em;

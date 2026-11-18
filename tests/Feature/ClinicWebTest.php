@@ -37,7 +37,7 @@ class ClinicWebTest extends TestCase
             'password' => 'password',
         ])->assertRedirect(route('dashboard'));
 
-        $this->get('/')->assertOk()->assertSee('AR Dental Care');
+        $this->get('/dashboard')->assertOk()->assertSee('AR Dental Care');
         $this->get('/appointments')->assertOk()->assertSee('Appointments');
         $this->get('/appointment-config')->assertOk()->assertSee('Appointment configuration');
         $this->get('/profile')->assertOk()->assertSee('Profile');

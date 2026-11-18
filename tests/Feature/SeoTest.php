@@ -16,7 +16,9 @@ class SeoTest extends TestCase
         $this->get('/robots.txt')
             ->assertOk()
             ->assertHeader('Content-Type', 'text/plain; charset=UTF-8')
+            ->assertSee('Allow: /')
             ->assertSee('Allow: /appointment/')
+            ->assertSee('Disallow: /dashboard')
             ->assertSee('Disallow: /rx/')
             ->assertSee('Sitemap: '.url('/sitemap.xml'));
     }
@@ -28,6 +30,7 @@ class SeoTest extends TestCase
         $this->get('/sitemap.xml')
             ->assertOk()
             ->assertHeader('Content-Type', 'application/xml; charset=UTF-8')
+            ->assertSee(route('home'), false)
             ->assertSee(route('appointment.public', $doctor->appointment_slug), false)
             ->assertSee(route('appointment.book', $doctor->appointment_slug), false)
             ->assertDontSee(url('/login'), false)
@@ -59,7 +62,7 @@ class SeoTest extends TestCase
         $doctor = $this->makeDoctor();
 
         $this->actingAs($doctor)
-            ->get('/')
+            ->get('/dashboard')
             ->assertOk()
             ->assertSee('content="noindex,nofollow"', false);
     }

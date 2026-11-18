@@ -22,6 +22,12 @@ class MobilePublicPagesTest extends TestCase
         $booking->assertSee('Select date');
         $booking->assertSee('sm:grid-cols', false);
 
+        $home = $this->get('/')->assertOk();
+        $home->assertSee('width=device-width', false);
+        $home->assertSee('home-hero', false);
+        $home->assertSee('min-h-[100dvh]', false);
+        $home->assertSee(route('login'), false);
+
         $login = $this->get('/login')->assertOk();
         $login->assertSee('width=device-width', false);
         $login->assertSee('min-h-screen');

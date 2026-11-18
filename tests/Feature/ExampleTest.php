@@ -6,8 +6,8 @@ use Tests\TestCase;
 
 class ExampleTest extends TestCase
 {
-    public function test_guests_are_sent_to_login(): void
+    public function test_guests_are_sent_to_login_from_dashboard(): void
     {
-        $this->get('/')->assertRedirect(route('login'));
+        $this->get('/dashboard')->assertRedirect(route('login'));
     }
 }

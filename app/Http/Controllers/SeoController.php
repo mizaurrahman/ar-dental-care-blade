@@ -13,12 +13,14 @@ class SeoController extends Controller
 
         $body = implode("\n", [
             'User-agent: *',
+            'Allow: /',
             'Allow: /appointment/',
             'Allow: /book/',
             'Allow: /sitemap.xml',
             'Disallow: /login',
             'Disallow: /register',
             'Disallow: /verify',
+            'Disallow: /dashboard',
             'Disallow: /prescriptions',
             'Disallow: /appointments',
             'Disallow: /appointment-config',
@@ -36,7 +38,14 @@ class SeoController extends Controller
 
     public function sitemap(): Response
     {
-        $urls = [];
+        $urls = [
+            [
+                'loc' => route('home'),
+                'changefreq' => 'weekly',
+                'priority' => '1.0',
+                'lastmod' => now()->toAtomString(),
+            ],
+        ];
 
         $clinics = User::query()
             ->whereNotNull('appointment_slug')

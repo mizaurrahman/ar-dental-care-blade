@@ -31,9 +31,9 @@
                 <span class="brand text-base font-extrabold tracking-tight sm:text-lg">AR Dental Care</span>
             </a>
             @auth
-                <a href="{{ route('dashboard') }}" class="btn-primary shrink-0 px-4 py-2.5 text-sm">Dashboard</a>
+                <a href="{{ route('dashboard') }}" class="btn-primary home-nav-cta shrink-0">Dashboard</a>
             @else
-                <a href="{{ route('login') }}" class="btn-primary shrink-0 px-4 py-2.5 text-sm">Login</a>
+                <a href="{{ route('login') }}" class="btn-primary home-nav-cta shrink-0">Login</a>
             @endauth
         </header>
 
@@ -51,14 +51,14 @@
 
                 <div class="home-fade home-fade--delay-3 mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:items-center">
                     @auth
-                        <a href="{{ route('dashboard') }}" class="btn-primary w-full px-6 py-3.5 text-base sm:w-auto">
+                        <a href="{{ route('dashboard') }}" class="btn-primary home-cta w-full sm:w-auto">
                             Open dashboard
                         </a>
                     @else
-                        <a href="{{ route('login') }}" class="btn-primary w-full px-6 py-3.5 text-base sm:w-auto">
+                        <a href="{{ route('login') }}" class="btn-primary home-cta w-full sm:w-auto">
                             Login
                         </a>
-                        <a href="{{ route('register') }}" class="home-secondary-cta w-full px-6 py-3.5 text-center text-base sm:w-auto">
+                        <a href="{{ route('register') }}" class="home-secondary-cta home-cta w-full sm:w-auto">
                             Create account
                         </a>
                     @endauth

@@ -65,11 +65,20 @@ class ProfileController extends Controller
             'avatar' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
         ]);
         $user = $request->user();
+        $previous = $user->avatar_path;
         $path = $request->file('avatar')->store('avatars', 'public');
-        if ($user->avatar_path) {
-            Storage::disk('public')->delete($user->avatar_path);
+
+        if (! is_string($path) || $path === '') {
+            throw ValidationException::withMessages([
+                'avatar' => 'Could not store the doctor photo. Please try again.',
+            ]);
         }
+
         $user->update(['avatar_path' => $path]);
+
+        if ($previous && $previous !== $path) {
+            Storage::disk('public')->delete($previous);
+        }
 
         return back()->with('status', 'Doctor photo updated.');
     }
@@ -91,11 +100,20 @@ class ProfileController extends Controller
             'logo' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
         ]);
         $user = $request->user();
+        $previous = $user->logo_path;
         $path = $request->file('logo')->store('logos', 'public');
-        if ($user->logo_path) {
-            Storage::disk('public')->delete($user->logo_path);
+
+        if (! is_string($path) || $path === '') {
+            throw ValidationException::withMessages([
+                'logo' => 'Could not store the clinic logo. Please try again.',
+            ]);
         }
+
         $user->update(['logo_path' => $path]);
+
+        if ($previous && $previous !== $path) {
+            Storage::disk('public')->delete($previous);
+        }
 
         return back()->with('status', 'Clinic logo updated on your prescription pad.');
     }

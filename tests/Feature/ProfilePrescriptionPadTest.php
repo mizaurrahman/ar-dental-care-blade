@@ -113,6 +113,31 @@ class ProfilePrescriptionPadTest extends TestCase
         $this->assertNull($doctor->logo_path);
     }
 
+    public function test_doctor_can_upload_and_remove_avatar(): void
+    {
+        Storage::fake('public');
+        $doctor = $this->makeDoctor();
+
+        $file = UploadedFile::fake()->image('doctor-photo.jpg', 240, 240);
+
+        $this->actingAs($doctor)
+            ->post('/profile/avatar', ['avatar' => $file])
+            ->assertRedirect();
+
+        $doctor->refresh();
+        $this->assertNotNull($doctor->avatar_path);
+        Storage::disk('public')->assertExists($doctor->avatar_path);
+        $this->assertStringContainsString('/storage/', (string) $doctor->avatar_url);
+
+        $this->actingAs($doctor)
+            ->delete('/profile/avatar')
+            ->assertRedirect();
+
+        $doctor->refresh();
+        $this->assertNull($doctor->avatar_path);
+        $this->assertNull($doctor->avatar_url);
+    }
+
     private function makeDoctor(array $overrides = []): User
     {
         $doctor = User::create(array_merge([

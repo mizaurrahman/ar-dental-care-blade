@@ -106,6 +106,22 @@ img, video, canvas, svg {
     radial-gradient(80% 60% at 80% 20%, rgba(47, 111, 237, 0.28), transparent 60%);
 }
 
+.home-nav-cta {
+  min-height: 2.5rem;
+  padding: 0.625rem 1rem;
+  font-size: 0.875rem;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.home-cta {
+  min-height: 3rem;
+  padding: 0.875rem 1.5rem;
+  font-size: 1rem;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
 .home-secondary-cta {
   display: inline-flex;
   align-items: center;
@@ -114,7 +130,6 @@ img, video, canvas, svg {
   border: 1px solid rgba(255, 255, 255, 0.35);
   background: rgba(255, 255, 255, 0.08);
   color: #fff;
-  font-size: 0.9375rem;
   font-weight: 650;
   text-decoration: none;
   backdrop-filter: blur(8px);
@@ -135,10 +150,17 @@ img, video, canvas, svg {
 .home-fade--delay-2 { animation-delay: 160ms; }
 .home-fade--delay-3 { animation-delay: 240ms; }
 
-@media (max-width: 639px) {
-  .home-hero .btn-primary,
-  .home-secondary-cta {
+@media (max-width: 767px) {
+  .home-hero .home-nav-cta {
+    min-height: 2.5rem;
+    padding: 0.625rem 1rem;
+    font-size: 0.875rem;
+  }
+
+  .home-hero .home-cta {
     min-height: 3rem;
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
   }
 }
 

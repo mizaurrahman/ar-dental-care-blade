@@ -20,6 +20,8 @@ class HomePageTest extends TestCase
             ->assertSee('viewport-fit=cover', false)
             ->assertSee(route('login'), false)
             ->assertSee('>Login<', false)
+            ->assertSee('home-nav-cta', false)
+            ->assertSee('home-cta', false)
             ->assertSee('content="index,follow"', false)
             ->assertSee('home-hero', false);
     }

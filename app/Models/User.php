@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable
 {
@@ -44,7 +45,7 @@ class User extends Authenticatable
 
     public function getAppointmentUrlAttribute(): ?string
     {
-        if (!$this->appointment_slug) {
+        if (! $this->appointment_slug) {
             return null;
         }
 
@@ -55,12 +56,20 @@ class User extends Authenticatable
 
     public function getAvatarUrlAttribute(): ?string
     {
-        return $this->avatar_path ? url('storage/'.$this->avatar_path) : null;
+        if (! $this->avatar_path) {
+            return null;
+        }
+
+        return Storage::disk('public')->url($this->avatar_path);
     }
 
     public function getLogoUrlAttribute(): ?string
     {
-        return $this->logo_path ? url('storage/'.$this->logo_path) : null;
+        if (! $this->logo_path) {
+            return null;
+        }
+
+        return Storage::disk('public')->url($this->logo_path);
     }
 
     public function availabilityRules(): HasMany
